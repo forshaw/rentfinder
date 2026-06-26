@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <button onclick="login()">Login</button>
+  <button onclick="loadOpenRequests()">Load Open Requests</button>
+
+  <script>
+    let token = null;
+
+    async function login() {
+      const res = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'justin@example.com',
+          password: 'StrongPassword2026'
+        })
+      });
+
+      const data = await res.json();
+      token = data.token;
+
+      console.log('JWT saved:', token);
+    }
+
+    async function loadOpenRequests() {
+      if (!token) {
+        alert('Login first!');
+        return;
+      }
+
+      const res = await fetch(
+        'http://localhost:3000/api/rental-requests/open',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      const data = await res.json();
+      console.log(data);
+    }
+  </script>
+</body>
+</html>

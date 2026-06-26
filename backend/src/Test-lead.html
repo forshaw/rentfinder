@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Lead Submission Test</title>
+</head>
+<body>
+  <h2>Lead Submission Test</h2>
+
+  <button onclick="login()">Login (Rent Finder)</button>
+  <br /><br />
+
+  <button onclick="submitLead()">Submit Lead</button>
+  <br /><br />
+
+  <input type="file" id="imageInput" />
+  <button onclick="uploadImage()">Upload Image</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    let token = null;
+    let createdLeadId = null;
+
+    function log(message) {
+      document.getElementById('output').textContent += message + '\n';
+      console.log(message);
+    }
+
+    async function login() {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'john@example.com',
+          password: 'StrongPassword123'
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        log('Login failed: ' + JSON.stringify(data));
+        return;
+      }
+
+      token = data.token;
+      log('✅ Logged in, JWT stored');
+    }
+
+  async function submitLead() {
+  if (!token) {
+    alert('Login first');
+    return;
+  }
+
+  const res = await fetch('http://localhost:3000/api/leads', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      rental_request_id: 1,                // ✅ existing request
+      property_address: 'Flat in Windhoek West',
+      agent_name: 'John Finder',
+      agent_contact: '+264812345678',
+      viewing_info: 'Available this Saturday at 10am',
+    }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    log('Lead creation error: ' + JSON.stringify(data));
+    return;
+  }
+
+  createdLeadId = data.lead_id || data.id;
+  log(`✅ Lead created (ID: ${createdLeadId})`);
+}
+
+    async function uploadImage() {
+      if (!token || !createdLeadId) {
+        alert('Login and submit a lead first');
+        return;
+      }
+
+      const fileInput = document.getElementById('imageInput');
+      if (!fileInput.files.length) {
+        alert('Select an image first');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('image', fileInput.files[0]);
+
+      const res = await fetch(`/api/leads/${createdLeadId}/images`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        log('Image upload error: ' + JSON.stringify(data));
+        return;
+      }
+
+      log('✅ Image uploaded: ' + data.image_url);
+    }
+  </script>
+</body>
+</html>

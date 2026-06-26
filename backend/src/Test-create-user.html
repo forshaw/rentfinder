@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Create Test User</h2>
+    <button onclick="createUser()">Create User</button>
+
+    <script>
+      async function createUser() {
+        const response = await fetch('http://localhost:3000/api/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'Justin Simasiku',
+            email: 'justin@example.com',
+            password: 'StrongPassword2026',
+            role: 'rent_finder',
+            phone_number: '+264812345678'
+          })
+        });
+
+        const data = await response.json();
+        console.log(data);
+        alert(JSON.stringify(data, null, 2));
+      }
+    </script>
+  </body>
+</html>
