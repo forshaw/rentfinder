@@ -58,7 +58,6 @@ app.get('/health', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ API running at http://localhost:${PORT}`);
-  console.log("✅ BACKEND PUBLIC KEY:", process.env.VAPID_PUBLIC_KEY);
 });
 
 

@@ -6,7 +6,7 @@ import NotificationBell from "./NotificationBell";
 export default function Header() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [, setMenuOpen] = useState(false);
 
   if (!user) return null;
 
