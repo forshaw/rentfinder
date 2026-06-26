@@ -39,7 +39,7 @@ export async function subscribeToPush(
   }
 
   // ✅ Send subscription to backend
-  await fetch("http://localhost:3000/api/push/subscribe", {
+  await fetch("https://rentfinder-vxp1.onrender.com/api/push/subscribe", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

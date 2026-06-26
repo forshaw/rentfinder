@@ -29,7 +29,7 @@ export interface AuthResponse {
 export async function loginUser(
   payload: LoginPayload
 ): Promise<AuthResponse> {
-  const res = await fetch("http://localhost:3000/api/auth/login", {
+  const res = await fetch("https://rentfinder-vxp1.onrender.com/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export async function registerUser(data: {
   role: string;
   phone: string;
 }) {
-  const res = await fetch("http://localhost:3000/api/auth/register", {
+  const res = await fetch("https://rentfinder-vxp1.onrender.com/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

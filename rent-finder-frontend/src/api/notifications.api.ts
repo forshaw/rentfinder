@@ -9,7 +9,7 @@
  * ✅ Get all notifications
  */
 export async function fetchNotifications(token: string) {
-  const res = await fetch("http://localhost:3000/api/notifications", {
+  const res = await fetch("https://rentfinder-vxp1.onrender.com/api/notifications", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -27,7 +27,7 @@ export async function fetchNotifications(token: string) {
  */
 export async function fetchUnreadCount(token: string) {
   const res = await fetch(
-    "http://localhost:3000/api/notifications/unread-count",
+    "https://rentfinder-vxp1.onrender.com/api/notifications/unread-count",
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ export async function fetchUnreadCount(token: string) {
  */
 export async function markAsRead(id: number, token: string) {
   const res = await fetch(
-    `http://localhost:3000/api/notifications/${id}/read`,
+    `https://rentfinder-vxp1.onrender.com/api/notifications/${id}/read`,
     {
       method: "PATCH",
       headers: {
@@ -69,7 +69,7 @@ export async function markAsRead(id: number, token: string) {
  */
 export async function markAllAsRead(token: string) {
   const res = await fetch(
-    "http://localhost:3000/api/notifications/mark-all-read",
+    "https://rentfinder-vxp1.onrender.com/api/notifications/mark-all-read",
     {
       method: "PATCH",
       headers: {

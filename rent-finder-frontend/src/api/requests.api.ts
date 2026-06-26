@@ -6,7 +6,7 @@ export async function createRequest(
   },
   token: string
 ) {
-  const res = await fetch("http://localhost:3000/api/requests", {
+  const res = await fetch("https://rentfinder-vxp1.onrender.com/api/requests", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export async function fetchMyRequests() {
   const token = raw ? JSON.parse(raw).token : null;
 
   const res = await fetch(
-    "http://localhost:3000/api/requests/my-requests",
+    "https://rentfinder-vxp1.onrender.com/api/requests/my-requests",
     {
       headers: {
         Authorization: `Bearer ${token}`,

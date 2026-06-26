@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/api/tasks";
+const API = "https://rentfinder-vxp1.onrender.com/api/tasks";
 
 function getToken() {
   const raw = localStorage.getItem("rentfinder_auth");
@@ -31,7 +31,7 @@ export async function fetchAvailableRequests() {
   const raw = localStorage.getItem("rentfinder_auth");
   const token = raw ? JSON.parse(raw).token : null;
 
-  const res = await fetch("http://localhost:3000/api/requests", {
+  const res = await fetch("https://rentfinder-vxp1.onrender.com/api/requests", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -49,7 +49,7 @@ export async function acceptRequest(requestId: number) {
   const token = raw ? JSON.parse(raw).token : null;
 
   const res = await fetch(
-    `http://localhost:3000/api/requests/${requestId}/accept`,
+    `https://rentfinder-vxp1.onrender.com/api/requests/${requestId}/accept`,
     {
       method: "POST",
       headers: {
@@ -69,7 +69,7 @@ export async function fetchMyTasks() {
   const raw = localStorage.getItem("rentfinder_auth");
   const token = raw ? JSON.parse(raw).token : null;
 
-  const res = await fetch("http://localhost:3000/api/tasks/finder", {
+  const res = await fetch("https://rentfinder-vxp1.onrender.com/api/tasks/finder", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -87,7 +87,7 @@ export async function completeTask(taskId: number) {
   const token = raw ? JSON.parse(raw).token : null;
 
   const res = await fetch(
-    `http://localhost:3000/api/tasks/${taskId}/complete`,
+    `https://rentfinder-vxp1.onrender.com/api/tasks/${taskId}/complete`,
     {
       method: "POST",
       headers: {
@@ -105,7 +105,7 @@ export async function fetchRequestById(id: number) {
   const token = raw ? JSON.parse(raw).token : null;
 
   const res = await fetch(
-    `http://localhost:3000/api/requests/${id}`,
+    `https://rentfinder-vxp1.onrender.com/api/requests/${id}`,
     {
       method: "GET",
       headers: {

@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/api/tasks";
+const API = "https://rentfinder-vxp1.onrender.com/api/tasks";
 
 function getToken() {
   const raw = localStorage.getItem("rentfinder_auth");
@@ -13,7 +13,7 @@ export async function fetchMyTasks() {
   const raw = localStorage.getItem("rentfinder_auth");
   const token = raw ? JSON.parse(raw).token : null;
 
-  const res = await fetch("http://localhost:3000/api/tasks/busy", {
+  const res = await fetch("https://rentfinder-vxp1.onrender.com/api/tasks/busy", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -34,7 +34,7 @@ export async function verifyTask(taskId: number) {
   const token = raw ? JSON.parse(raw).token : null;
 
   const res = await fetch(
-    `http://localhost:3000/api/tasks/${taskId}/verify`,
+    `https://rentfinder-vxp1.onrender.com/api/tasks/${taskId}/verify`,
     {
       method: "POST",
       headers: {
@@ -71,7 +71,7 @@ export async function fetchAssignedTasks() {
   const raw = localStorage.getItem("rentfinder_auth");
   const token = raw ? JSON.parse(raw).token : null;
 
-  const res = await fetch("http://localhost:3000/api/tasks/assigned", {
+  const res = await fetch("https://rentfinder-vxp1.onrender.com/api/tasks/assigned", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -92,7 +92,7 @@ export async function payEscrow(escrowId: number) {
   const token = raw ? JSON.parse(raw).token : null;
 
   const res = await fetch(
-    `http://localhost:3000/api/escrow/${escrowId}/fund`,
+    `https://rentfinder-vxp1.onrender.com/api/escrow/${escrowId}/fund`,
     {
       method: "POST",
       headers: {
@@ -117,7 +117,7 @@ export async function completeTask(taskId: number) {
   const token = raw ? JSON.parse(raw).token : null;
 
   const res = await fetch(
-    `http://localhost:3000/api/tasks/${taskId}/complete`,
+    `https://rentfinder-vxp1.onrender.com/api/tasks/${taskId}/complete`,
     {
       method: "POST",
       headers: {
@@ -146,7 +146,7 @@ export async function submitPaymentProof(
   formData.append("proof", file);
 
   const res = await fetch(
-    `http://localhost:3000/api/escrow/${escrowId}/proof`,
+    `https://rentfinder-vxp1.onrender.com/api/escrow/${escrowId}/proof`,
     {
       method: "POST",
       headers: {
