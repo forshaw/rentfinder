@@ -1,4 +1,4 @@
-import webPush from "web-push";
+const webPush = require("web-push");
 
 if (
   process.env.VAPID_PUBLIC_KEY &&
