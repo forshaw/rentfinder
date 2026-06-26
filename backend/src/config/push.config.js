@@ -1,9 +1,14 @@
-const webPush = require("web-push");
+import webPush from "web-push";
 
-webPush.setVapidDetails(
-  "mailto:mujohn.alphinius@gmail.com",
-  process.env.VAPID_PUBLIC_KEY,
+if (
+  process.env.VAPID_PUBLIC_KEY &&
   process.env.VAPID_PRIVATE_KEY
-);
-
-module.exports = webPush;
+) {
+  webPush.setVapidDetails(
+    "mailto:your@email.com",
+    process.env.VAPID_PUBLIC_KEY,
+    process.env.VAPID_PRIVATE_KEY
+  );
+} else {
+  console.warn("⚠️ VAPID keys not set — push disabled");
+}
