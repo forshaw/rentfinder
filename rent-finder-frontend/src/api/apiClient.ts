@@ -1,5 +1,6 @@
-const API_BASE =
-  import.meta.env.VITE_API_URL || "https://rentfinder-vxp1.onrender.com";
+const API_BASE = (
+  import.meta.env.VITE_API_URL || "https://rentfinder-vxp1.onrender.com"
+).replace(/\/+$/, "");
 
 export async function apiFetch(
   path: string,
@@ -7,7 +8,9 @@ export async function apiFetch(
 ) {
   const token = localStorage.getItem("auth_token");
 
-  const res = await fetch(`${API_BASE}${path}`, {
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+
+  const res = await fetch(`${API_BASE}${cleanPath}`, {
     ...options,
     headers: {
       "Content-Type": "application/json",
